@@ -41,7 +41,13 @@ public class MazeGenerator {
     }
 
     public void Kruskals() {
+        PriorityQueue<Integer> = new PriorityQueue();
         
+        for(int i = 0; i < maze.adjMatrix.length; i++) {
+            for(int j = 0; j < maze.adjMatrix[i].length; j++){
+                
+            }
+
     }
 
     public static void main(String[] args) {

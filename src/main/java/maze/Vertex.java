@@ -22,14 +22,30 @@ public class Vertex implements Comparable<Vertex>{
         return edges;
     }
 
-    public void addEdge(Vertex destination) {
-        if(destination == null) return;
+    public boolean addEdge(Vertex destination) {
+        if(destination == null) return false;
         edges.add(new Edge(this, destination, rand.nextInt(51)));
+        return true;
     }
 
     @Override
     public int compareTo(Vertex o) {
         return  o.id - this.id;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this) {
+            return true;
+        }
+
+        if(!(obj instanceof Vertex)) {
+            return false;
+        }
+
+        Vertex o = (Vertex)obj;
+
+        return o.id == this.id;
     }
 
     @Override
