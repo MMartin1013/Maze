@@ -8,4 +8,9 @@ public class Edge {
         this.destination = destination;
         this.weight = weight;
     }
+
+    @Override
+    public String toString() {
+        return source + "-" + weight + "-" + destination;
+    }
 }
