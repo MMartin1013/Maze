@@ -1,23 +1,23 @@
 package maze;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class MazeGenerator {
     private int[][] maze;
-    private int[][] adjMatrix;
-    private Random rand;
+    Graph graph;
 
     
     public MazeGenerator() {
-        rand = new Random();
-        randomizeMatrix();
+        graph = new Graph();
+        //randomizeMatrix();
     }
     
     public MazeGenerator(int bounds) {
-        adjMatrix = new int[bounds][bounds];
-        rand = new Random();
-        randomizeMatrix();
+        graph = new Graph(bounds);
+        //randomizeMatrix();
     }
 
+    /*
     public void randomizeMatrix() {
         if(adjMatrix == null) return;
         
@@ -27,38 +27,46 @@ public class MazeGenerator {
                 adjMatrix[i][j] = randNum;
             }
         }
-        
     }
+    */
 
     public void changeBounds(int bounds) {
-        adjMatrix = new int[bounds][bounds];
-        randomizeMatrix();
+        graph = new Graph(bounds);
     }
 
+    public ArrayList<Edge> generateMST() {
+        PriorityQueue<Edge> edges = graph.getEdges();
+        ArrayList<Edge> mazeEdges = new ArrayList<>();
+        boolean[] visited = new boolean[graph.getSize()];
+        boolean allVisited = false;
 
-    public void createWalls() {
-        
-    }
+        while(!allVisited){
+            Edge edge = edges.remove();
 
-    public void Kruskals() {
-        PriorityQueue<Integer> = new PriorityQueue();
-        
-        for(int i = 0; i < maze.adjMatrix.length; i++) {
-            for(int j = 0; j < maze.adjMatrix[i].length; j++){
-                
+            if(!visited[edge.getDestination().getId()]){
+                mazeEdges.add(edge);
+                visited[edge.getSource().getId()] = true;
+                visited[edge.getDestination().getId()] = true;
             }
 
-    }
-
-    public static void main(String[] args) {
-        MazeGenerator maze = new MazeGenerator();
-
-        for(int i = 0; i < maze.adjMatrix.length; i++) {
-            for(int j = 0; j < maze.adjMatrix[i].length; j++){
-                System.out.print(maze.adjMatrix[i][j] + " ");
+            for(int i = 0; i < visited.length; i++) {
+                if(!visited[i]) {
+                    break;
+                }else if(visited[i] && i == visited.length -1) {
+                    allVisited = true;
+                    break;
+                }
             }
+
+            System.out.println(edge);
+            for(int i = 0; i < visited.length; i++){
+                System.out.print(i + ": " +visited[i] + " ");
+            }
+
             System.out.println();
         }
-    }   
-    
+
+        return mazeEdges;
+        
+    }
 }

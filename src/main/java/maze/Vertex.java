@@ -5,13 +5,11 @@ import java.util.Random;
 public class Vertex implements Comparable<Vertex>{
     private Random rand = new Random();
     private ArrayList<Edge> edges;
-    private ArrayList<Vertex> neighbors;
     private int id;
 
     public Vertex(int id) {
         this.id = id;
         edges = new ArrayList<>();
-        neighbors = new ArrayList<>();
     }
 
     public int getId() {
@@ -30,7 +28,7 @@ public class Vertex implements Comparable<Vertex>{
 
     @Override
     public int compareTo(Vertex o) {
-        return  o.id - this.id;
+        return  this.id - o.id;
     }
 
     @Override
