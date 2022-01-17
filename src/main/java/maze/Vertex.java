@@ -1,15 +1,15 @@
 package maze;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Vertex implements Comparable<Vertex>{
-    private Random rand = new Random();
     private ArrayList<Edge> edges;
+    private ArrayList<Vertex> neighbors;
     private int id;
 
     public Vertex(int id) {
         this.id = id;
         edges = new ArrayList<>();
+        neighbors = new ArrayList<>();
     }
 
     public int getId() {
@@ -19,11 +19,33 @@ public class Vertex implements Comparable<Vertex>{
     public ArrayList<Edge> getEdges() {
         return edges;
     }
+    
+    public ArrayList<Vertex> getNeighbors() {
+        return neighbors;
+    }
+    
+    public boolean addNeighbor(Vertex vertex) {
+        if(vertex == null) return false;
+        neighbors.add(vertex);
+        return true;
+    }
 
     public boolean addEdge(Vertex destination) {
-        if(destination == null) return false;
-        edges.add(new Edge(this, destination, rand.nextInt(51)));
+        if(destination == null || edges.contains(new Edge(this,destination))) return false;
+        edges.add(new Edge(this, destination));
+        if(!neighbors.contains(destination)) neighbors.add(destination);
         return true;
+    }
+
+    public boolean addEdge(Edge edge) {
+        if(edge == null || edges.contains(edge)) return false;
+        edges.add(edge);
+        if(!neighbors.contains(edge.getDestination())) neighbors.add(edge.getDestination());
+        return true;
+    }
+
+    public boolean removeEdge(Edge edge) {
+        return edges.remove(edge);
     }
 
     @Override

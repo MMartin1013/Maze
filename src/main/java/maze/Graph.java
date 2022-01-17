@@ -1,4 +1,5 @@
 package maze;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class Graph {
@@ -8,7 +9,7 @@ public class Graph {
      */
     public int vertexCount = 0;
 
-    private final int DEFAULT_BOUNDS = 5;
+    private static final int DEFAULT_BOUNDS = 5;
     
     private int size;
 
@@ -28,8 +29,8 @@ public class Graph {
                 adjMatrix[i][j] = new Vertex(vertexCount++);
             }
         }
-        
-        generateEdges();
+
+        generateNeighbors();
     }
 
     public Graph(int bounds) {
@@ -42,20 +43,36 @@ public class Graph {
             }
         }
 
-        generateEdges();
+        generateNeighbors();
     }
 
+    public void generateNeighbors() {
+        for(int i = 0; i < adjMatrix.length; i++) {
+            for(int j = 0; j < adjMatrix.length; j++) {
+                Vertex source = adjMatrix[i][j];
+                Vertex W = (j == 0) ? null : adjMatrix[i][j - 1];
+                Vertex E = (j == adjMatrix[i].length - 1) ? null : adjMatrix[i][j + 1];
+                Vertex N = (i == 0) ? null : adjMatrix[i - 1][j];
+                Vertex S = (i  == adjMatrix.length - 1) ? null : adjMatrix[i + 1][j];
+                source.addNeighbor(N);
+                source.addNeighbor(S);                
+                source.addNeighbor(W);
+                source.addNeighbor(E);
+            }
+        }
+    }
+    
     public void generateEdges() {
         for(int i = 0; i < adjMatrix.length; i++) {
             for(int j = 0; j < adjMatrix.length; j++) {
                 Vertex source = adjMatrix[i][j];
-                // Vertex W = (j == 0) ? null : adjMatrix[i][j - 1];
+                Vertex W = (j == 0) ? null : adjMatrix[i][j - 1];
                 Vertex E = (j == adjMatrix[i].length - 1) ? null : adjMatrix[i][j + 1];
-                // Vertex N = (i == 0) ? null : adjMatrix[i - 1][j];
+                Vertex N = (i == 0) ? null : adjMatrix[i - 1][j];
                 Vertex S = (i  == adjMatrix.length - 1) ? null : adjMatrix[i + 1][j];
-                // source.addEdge(N);
+                source.addEdge(N);
                 source.addEdge(S);                
-                // source.addEdge(W);
+                source.addEdge(W);
                 source.addEdge(E);
             }
         }
@@ -79,17 +96,49 @@ public class Graph {
         return edges;
     }
 
+    
+    public int getBounds() {
+        return size;
+    }
+
     public int getSize() {
         return size * size;
     }
 
     public void showEdges(){
+        
+        System.out.print(" ");
+        for(int i = 0; i < getBounds(); i++) {
+            System.out.print("_ ");
+        } 
+        System.out.println();
+
         for(int i = 0; i < adjMatrix.length; i++) {
-            for(int j = 0; j < adjMatrix[i].length; j++) { 
-                System.out.print("|_");
+            for(int j = 0; j < adjMatrix[i].length; j++) {
+                ArrayList<Edge> edges = adjMatrix[i][j].getEdges();
+                boolean left = false;
+                boolean bottom = false;
+                for(Edge edge : edges){
+                    if(edge.getSource().getId() - 1 == edge.getDestination().getId()) {
+                        left = true;
+                    }else if(edge.getSource().getId() + adjMatrix.length == edge.getDestination().getId()) {
+                        bottom = true;
+                    }
+                }
+
+                if(left && bottom) {
+                    System.out.print("  ");
+                }else if(left) {
+                    System.out.print(" _");
+                }else if(bottom){
+                    System.out.print("| ");
+                }else {
+                    System.out.print("|_");
+                }
             }
-            System.out.println();
+            System.out.println("|");
         }
+        System.out.println();
     }
 
     @Override

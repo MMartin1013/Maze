@@ -1,13 +1,11 @@
 package maze;
-public class Edge implements Comparable<Edge>{
-    private int weight;
+public class Edge {
     private Vertex source;
     private Vertex destination;
 
-    public Edge(Vertex source, Vertex destination, int weight) {
+    public Edge(Vertex source, Vertex destination) {
         this.source = source;
         this.destination = destination;
-        this.weight = weight;
     }
 
     public Vertex getSource() {
@@ -16,15 +14,6 @@ public class Edge implements Comparable<Edge>{
 
     public Vertex getDestination() {
         return destination;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    @Override
-    public int compareTo(Edge o) {
-        return this.weight - o.getWeight();
     }
 
     @Override
@@ -44,6 +33,6 @@ public class Edge implements Comparable<Edge>{
 
     @Override
     public String toString() {
-        return source + "-" + weight + "-" + destination;
+        return source + "--" + destination;
     }
 }

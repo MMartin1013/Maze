@@ -10,7 +10,8 @@ public class VertexTest{
     Vertex testVertex1 = new Vertex(10);
     Vertex testVertex2 = new Vertex(10);
     Vertex testVertex3 = new Vertex(15);
-    Edge testEdge = new Edge(testVertex1, testVertex2, 10);
+    Vertex testVertex4 = null;
+    Edge testEdge = new Edge(testVertex1, testVertex2);
 
     @Test
     void testGetId(){
@@ -21,7 +22,7 @@ public class VertexTest{
     void testAddEdge(){
         assertTrue(testVertex1.addEdge(testVertex2));
         assertTrue(testVertex1.getEdges().contains(testEdge));
-        assertFalse(testVertex1.addEdge(null));
+        assertFalse(testVertex1.addEdge(testVertex4));
     }
 
     @Test

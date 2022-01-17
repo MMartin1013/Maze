@@ -12,14 +12,21 @@ public final class App {
      * @param args The arguments of the program.
      */
     public static void main(String[] args) {
-        Graph graph = new Graph();
-        MazeGenerator gen = new MazeGenerator();
+        MazeGenerator gen = new MazeGenerator(6);
 
-        System.out.println(graph);
+        System.out.println(gen.getGraph());
 
-        graph.showEdges();
+        gen.showMaze();
+        
+        gen.makeST();
 
-        //System.out.println(graph.getEdges());
+        System.out.println();
+
+        gen.showMaze();;
+    
+        gen.generateMaze();
+
+        gen.showMaze();
         
     }
 }
