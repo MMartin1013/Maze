@@ -23,3 +23,4 @@ Run in the commandline
 ```
 java -cp target/maze-1.0-SNAPSHOT.jar maze.App
 ```
+<img width="464" alt="MazeGameDemo" src="https://user-images.githubusercontent.com/77557341/150266382-ba767891-bb35-485f-ae81-9b67f094389e.png">
