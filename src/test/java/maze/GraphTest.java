@@ -2,8 +2,6 @@ package maze;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class GraphTest {
     Graph testGraph = new Graph();
@@ -28,5 +26,19 @@ public class GraphTest {
                 assertEquals(testMatrix1[i][j], testGraph1.getAdjMatrix()[i][j]);
              }
         }
+    }
+
+    @Test
+    void testGetBounds(){
+        assertEquals(5, testGraph.getBounds());
+        assertEquals(10, testGraph1.getBounds());
+
+    }
+
+    @Test
+    void testGetSize(){
+        assertEquals(25, testGraph.getSize());
+        assertEquals(100, testGraph1.getSize());
+
     }
 }

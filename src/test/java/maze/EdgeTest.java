@@ -1,8 +1,7 @@
 package maze;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 public class EdgeTest {
@@ -33,8 +32,8 @@ public class EdgeTest {
 
     @Test
     void testEquals(){
-        assertFalse(testEdge.equals(testEdge1));
-        assertTrue(testEdge.equals(testEdge2));
-        assertFalse(testEdge.equals(testEdge3));
+        assertNotEquals(testEdge,testEdge1);
+        assertEquals(testEdge,testEdge2);
+        assertNotEquals(testEdge,testEdge3);
     }    
 }

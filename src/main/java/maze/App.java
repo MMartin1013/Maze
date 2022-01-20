@@ -1,32 +1,25 @@
 package maze;
 
 /**
- * Hello world!
+ * Runs all the files in the maze package.
  */
 public final class App {
     private App() {
+
     }
 
     /**
-     * Says hello to the world.
+     * Runs the app.
+     */
+    public static void start(){
+        new Gui();
+    }
+
+    /**
+     * Main method of the program.
      * @param args The arguments of the program.
      */
     public static void main(String[] args) {
-        MazeGenerator gen = new MazeGenerator(6);
-
-        System.out.println(gen.getGraph());
-
-        gen.showMaze();
-        
-        gen.makeST();
-
-        System.out.println();
-
-        gen.showMaze();;
-    
-        gen.generateMaze();
-
-        gen.showMaze();
-        
+        App.start();
     }
 }
